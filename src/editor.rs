@@ -8,14 +8,11 @@ impl Editor {
             match read().unwrap(){
                 Event::Key(event) => {
                     if event.kind == KeyEventKind::Press {
-                        if event.modifiers.contains(KeyModifiers::CONTROL) && event.code == KeyCode::Char('q'){
+                        if event.modifiers.contains(KeyModifiers::CONTROL) && event.code == KeyCode::Char('c'){
                             break;
                         }
-                        if event.modifiers.contains(KeyModifiers::CONTROL){
-                            println!("ctr pressed with key: {:?}", event.code);
-                        }
                         else {
-                            println!("{:?}", event.code);
+                            println!("{:?}", event);
                         }
                     }
                 },
@@ -25,10 +22,10 @@ impl Editor {
     }
 
     pub fn default() -> Self {
-        Editor{}
+        Self{}
     }
 }
 
-fn die(e: std::io::Error) {
+fn die(e: &std::io::Error) {
     panic!("{}", e);
 }
